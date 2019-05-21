@@ -61,7 +61,6 @@ public class BannerController implements Initializable{
     @FXML
     private AnchorPane drawPane;
     @FXML
-    private Button explorate;
     private File data;
     private Banner banner;
     
@@ -116,12 +115,13 @@ public class BannerController implements Initializable{
     	URL uri = new URL(banner.searchViewer(viewText.getText()).getAvatar());
     	Image a = new Image(uri.toURI().toString());
     	avatar.setImage(a);
-    	viewersState.setText("Viewer with " + viewText.getText() + " can be found");
+    	viewersState.setText("Viewer with " + viewText.getText() + " id can be found");
     	long end = System.currentTimeMillis();
     	double time = (double)(end - start)/1000;
     	timeViewers.setText(time + "s");
+    	} else if (banner.searchViewer(viewText.getText()) == null){
+    		viewersState.setText("Viewer with " + viewText.getText() + " id couldn't be found");
     	} else {
-    		viewersState.setText("Viewer with " + viewText.getText() + " couldn't be found");
     		throw new Exception("Data have not load yet!");
     	}
     }

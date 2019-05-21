@@ -13,6 +13,18 @@ public class Banner {
 	public Banner() {
 		root = null;
 	}
+	public Participant getFirst() {
+		return first;
+	}
+	public void setFirst(Participant first) {
+		this.first = first;
+	}
+	public Participant getLast() {
+		return last;
+	}
+	public void setLast(Participant last) {
+		this.last = last;
+	}
 	public void loadThree(File file) throws IOException {
 		FileReader fr = new FileReader(file);
 		BufferedReader br = new BufferedReader(fr);
@@ -74,10 +86,14 @@ public class Banner {
     		throw new Exception("Error. The three is empty");
     	} else if (aux.getId().compareTo(id) == 0) {
     		return aux;
+    	} else if(aux.getRight() == null && aux.getLeft() == null) {
+    		return null;
     	} else if (aux.getId().compareTo(id) > 0) {
     		return searchV(id, aux.getLeft());
     	} else {
     		return searchV(id, aux.getRight());
-    	}  
+    	}
+    	
+    	
     }
 }

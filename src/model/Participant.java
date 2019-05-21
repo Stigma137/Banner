@@ -13,8 +13,18 @@ public class Participant {
 	private Participant next;
 	private Participant previous;
 	
-	public Participant() {
-		
+	public Participant(String id, String firstName, String lastName, String email, String avatar, String gender, String ip, String country, String birthday) {
+		this.id = id;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.email = email;
+		this.avatar = avatar;
+		this.gender = gender;
+		this.ip = ip;
+		this.country = country;
+		this.birthday = birthday;
+		next = null;
+		previous = null;
 	}
 	public String getId() {
 		return id;

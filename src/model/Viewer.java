@@ -25,7 +25,6 @@ public class Viewer {
 		this.birthday = birthday;
 		right = null;
 		left = null;
-		
 	}
 
 	public String getId() {
