@@ -92,4 +92,7 @@ public class Participant {
 	public void setPrevious(Participant previous) {
 		this.previous = previous;
 	}
+	public static Participant cast(Viewer c) {
+		return new Participant(c.getId(), c.getFirstName(), c.getLastName(), c.getEmail(), c.getAvatar(), c.getGender(), c.getIp(), c.getCountry(), c.getBirthday());
+	}
 }

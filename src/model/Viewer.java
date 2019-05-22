@@ -1,6 +1,6 @@
 package model;
 
-public class Viewer {
+public class Viewer implements Comparable<Viewer>{
 	private String id;
 	private String lastName;
 	private String firstName;
@@ -112,5 +112,19 @@ public class Viewer {
 
 	public void setLeft(Viewer left) {
 		this.left = left;
+	}
+	public void replaceData(Viewer esp) {
+		setFirstName(esp.getFirstName());
+		setBirthday(esp.getBirthday());
+		setCountry(esp.getCountry());
+		setEmail(esp.getEmail());
+		setGender(esp.getGender());
+		setId(esp.getId());
+		setLastName(esp.getLastName());
+		setAvatar(esp.getAvatar());
+	}
+	@Override
+	public int compareTo(Viewer v) {
+		return this.id.compareTo(v.id);
 	}
 }

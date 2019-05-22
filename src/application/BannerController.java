@@ -2,13 +2,14 @@ package application;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
@@ -83,6 +84,7 @@ public class BannerController implements Initializable{
     	try {
 			banner.loadThree(data);
 			loadState.setText("Data was load sucessfully");
+			System.out.print(banner.getWeight(banner.getRoot()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -96,7 +98,7 @@ public class BannerController implements Initializable{
 
     @FXML
     void searchParticipants(ActionEvent event) {
-
+    	
     }
 
     @FXML
@@ -119,6 +121,7 @@ public class BannerController implements Initializable{
     	long end = System.currentTimeMillis();
     	double time = (double)(end - start)/1000;
     	timeViewers.setText(time + "s");
+    	
     	} else if (banner.searchViewer(viewText.getText()) == null){
     		viewersState.setText("Viewer with " + viewText.getText() + " id couldn't be found");
     	} else {
@@ -127,8 +130,32 @@ public class BannerController implements Initializable{
     }
 
     @FXML
-    void viewersDraw(ActionEvent event) {
-
+    void viewersDraw(ActionEvent event) throws MalformedURLException, URISyntaxException, Exception {
+    	if (loadState.getText().equals("Data was load sucessfully") && banner.searchParticipant(participantsText.getText()) != null) {
+    		long start = System.currentTimeMillis();
+        	idLabel.setText(banner.searchParticipant(participantsText.getText()).getId());
+        	fnLabel.setText(banner.searchParticipant(participantsText.getText()).getFirstName());
+        	lnLabel.setText(banner.searchParticipant(participantsText.getText()).getLastName());
+        	emailLabel.setText(banner.searchParticipant(participantsText.getText()).getEmail());
+        	genderLabel.setText(banner.searchParticipant(participantsText.getText()).getGender());
+        	ipLabel.setText(banner.searchParticipant(participantsText.getText()).getIp());
+        	counLabel.setText(banner.searchParticipant(participantsText.getText()).getCountry());
+        	birthLabel.setText(banner.searchParticipant(participantsText.getText()).getBirthday());
+        	
+        	URL uri = new URL(banner.searchParticipant(participantsText.getText()).getAvatar());
+        	Image a = new Image(uri.toURI().toString());
+        	avatar.setImage(a);
+        	participantsState.setText("Participant with " + participantsText.getText() + " id can be found");
+        	long end = System.currentTimeMillis();
+        	double time = (double)(end - start)/1000;
+        	timeParticipants.setText(time + "s");
+        	
+        	} else if (banner.searchParticipant(participantsText.getText()) == null){
+        		participantsState.setText("Participant with " + participantsText.getText() + " id couldn't be found");
+        	} else {
+        		throw new Exception("Data have not load yet!");
+        	}	
+    	
     }
 
 	@Override
